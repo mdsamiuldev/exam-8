@@ -97,10 +97,14 @@ export default function LoginPage() {
         <button 
           type="button" 
           onClick={async () => {
-            await signIn.social({
-              provider: "google",
-              callbackURL: "/",
-            });
+            try {
+              await signIn.social({
+                provider: "google",
+                callbackURL: "/",
+              });
+            } catch {
+              setError("Google sign-in is not configured. Please use email & password.");
+            }
           }}
           className="w-full py-3 px-4 bg-white/10 hover:bg-white/20 border border-white/20 text-white rounded-xl font-semibold transition-all flex items-center justify-center gap-3 shadow-md cursor-pointer"
         >
